@@ -1,18 +1,11 @@
-const express = require('express');
-const bodyParser = require('body-parser');
 const axios = require('axios');
 require('dotenv').config();
-
-const app = express();
-const port = process.env.PORT || 3000;
-
-app.use(bodyParser.json());
-app.use(express.static(__dirname)); // Serve static files from the root directory
 
 const deepseekApiKey = process.env.DEEPSEEK_API_KEY;
 const deepseekApiUrl = 'https://api.deepseek.com/chat/completions';
 
 async function getAiInterpretation(data) {
+    // ... (The AI interpretation logic remains the same)
     if (!deepseekApiKey) {
         console.error("DeepSeek API key is not set.");
         return {
@@ -63,7 +56,11 @@ async function getAiInterpretation(data) {
     }
 }
 
-app.post('/api/divine', async (req, res) => {
+module.exports = async (req, res) => {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method Not Allowed' });
+    }
+
     try {
         const data = req.body;
         if (!data) {
@@ -71,14 +68,10 @@ app.post('/api/divine', async (req, res) => {
         }
         
         const aiResult = await getAiInterpretation(data);
-        res.json(aiResult);
+        res.status(200).json(aiResult);
 
     } catch (error) {
         console.error('Error in /api/divine:', error);
         res.status(500).json({ error: 'An internal server error occurred' });
     }
-});
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+};
