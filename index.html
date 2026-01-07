@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>六爻算命</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="user-info-screen">
+        <div class="container">
+            <h1>六爻神算</h1>
+            <p class="subtitle">请输入您的信息以开始</p>
+            <div class="input-area">
+                <label for="name">您的姓名：</label>
+                <input type="text" id="name" placeholder="请输入您的姓名">
+                <label for="birthdate">您的生日：</label>
+                <div id="birthdate-container">
+                    <input type="number" id="birth-year" placeholder="年" min="1900" max="2099">
+                    <span>年</span>
+                    <input type="number" id="birth-month" placeholder="月" min="1" max="12">
+                    <span>月</span>
+                    <input type="number" id="birth-day" placeholder="日" min="1" max="31">
+                    <span>日</span>
+                </div>
+            </div>
+            <button id="enter-divination-button">进入占卜</button>
+        </div>
+    </div>
+
+    <div id="divination-screen" style="display: none;">
+        <div class="container">
+            <h1>六爻神算</h1>
+            <p class="subtitle">诚心发问，一事一问，随缘开解。</p>
+            <div class="input-area">
+                <label for="question">请输入您的问题：</label>
+                <input type="text" id="question" placeholder="例如：今日运势如何？">
+            </div>
+            <button id="divine-button">开始占卜</button>
+            <div id="divination-display-area">
+                <div id="animation-container">
+                    <img src="divination.gif" alt="占卜动画" id="animation-gif">
+                </div>
+                <div id="hexagram-display">
+                    <!-- 卦象将在这里显示 -->
+                </div>
+            </div>
+            <div id="result-display">
+                <!-- 解卦结果将在这里显示 -->
+            </div>
+            <div class="history-area">
+                <div class="history-header">
+                    <h2>占卜历史</h2>
+                    <button id="clear-history-button">清除历史</button>
+                </div>
+                <ul id="history-list">
+                    <!-- 历史记录将在这里显示 -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <audio id="click-sound" src="click.mp3" preload="auto"></audio>
+    <audio id="result-sound" src="result.mp3" preload="auto"></audio>
+    <script src="hexagrams.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
